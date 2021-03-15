@@ -7,18 +7,18 @@ body {
     background: linear-gradient(-45deg, #35577D, #141E30);
     margin: 0;
     padding: 0;
-  }
-  
-  h1 {
+}
+
+h1 {
     color: #FFF !important;
     font-size: 2em;
     padding-top: 100px;
     width: 100%;
     font-family: Georgia;
     text-align: center;
-  }
-  
-  h2 {
+}
+
+h2 {
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
     color: rgba(255, 255, 255, 0.5);
     font-weight: 100;
@@ -28,9 +28,9 @@ body {
     text-align: left;
     width: 70%;
     font-family: Georgia;
-  }
-  
-  p {
+}
+
+p {
     color: AliceBlue;
     line-height: 1.3em;
     text-align: left;
@@ -38,18 +38,18 @@ body {
     font-family: Helvetica;
     font-size: 18px;
     font-weight: bold;
-  }
-  
-  .byline {
+}
+
+.byline {
     font-family: Helvetica;
     color: rgba(255, 255, 255, 0.5);
     float: left;
     font-size: 14px;
     padding-left: 10px;
     text-transform: uppercase;
-  }
-  
-  .caption {
+}
+
+.caption {
     display: block;
     font-family: 'Playfair Display', serif;
     font-size: 14px;
@@ -63,24 +63,23 @@ body {
     background-color: white;
     color: black;
     opacity: 0.75;
-  }
-  
-  .content {
+}
+
+.content {
     padding: 40px;
-  }
-  
-  .image {
+}
+
+.image {
     background-image: url("https://content.codecademy.com/courses/freelance-1/unit-2/soccer.jpeg");
     background-size: cover;
     background-position: center;
     height: 300px;
-  }
-  
-  .writer-img {
+}
+
+.writer-img {
     -webkit-box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
     -moz-box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
     box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
     float: left;
     width: 50px;
-  }
-  
+}
