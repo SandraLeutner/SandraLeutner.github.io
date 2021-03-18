@@ -1,9 +1,13 @@
+/*Maximale Breite setzen und Inhalt zentrieren, Schriftarten festsetzen*/
 body {
     max-width: 1280px;
     margin:auto;
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/*überschrift im header bereich zentrieren; 
+dann paragraph innerhalb des headers, padding bedeutet, dass sie nicht ganz am rand klebt
+*/
 header {
     text-align: center;
 }
@@ -37,6 +41,7 @@ header address{
     font-style: italic;
 }
 
+/*breite und zentrieren; Justify: blocksatz*/
 main{
     max-width: 70%;
     margin: auto;
@@ -55,20 +60,29 @@ main figure img{
     border: 1px solid black;
 }
 
+/*border für map definieren und umranden*/
 #map {
     height: 360px;
     width: 100%;
     border: 1px solid gray;
 }
 
+/*andere aufzählungszeichen für liste*/
 main ul{
     list-style-type: circle;
 }
 
+/*elemente innerhalb einer zeile links oder rechts positionieren*/
 footer .next{
     float: right;
 }
 
-footer .back{
+footer .back {
+    float: left;
+}
+
+footer {
     padding: 1em 0 3em 0;
 }
+
+/*Icons in webseite einbauen*/
