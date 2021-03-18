@@ -2,7 +2,7 @@
 body {
     max-width: 1280px;
     margin:auto;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 /*überschrift im header bereich zentrieren; 
@@ -49,6 +49,7 @@ main{
 
 main p{
     text-align: justify;
+    font-family: 'Roboto Condensed';
 }
 
 main figure {
@@ -85,4 +86,25 @@ footer {
     padding: 1em 0 3em 0;
 }
 
+.mr-3 {
+    margin-right: 0.3em;
+}
+
+.ml-3 {
+    margin-left: 0.3em;
+}
+
+/*Darstellung am Handy*/
+@media screen and (max-width: 900px) {
+    main {
+        max-width: 90%;
+    }
+}
+
+/*vw=viweport width=breite, die max am bildschirm angezeigt werden kann*/
+@media screen and (max-width: 1280px) {
+    header img.banner {
+        width: 100vw; 
+    }
+}
 /*Icons in webseite einbauen*/
