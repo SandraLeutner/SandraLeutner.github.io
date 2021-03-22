@@ -1,7 +1,7 @@
 /*Maximale Breite setzen und Inhalt zentrieren, Schriftarten festsetzen*/
 body {
     max-width: 1280px;
-    margin:auto;
+    margin: auto;
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -22,34 +22,33 @@ header p {
 
 .white,
 .white a:link,
-.white a:visited
-{
+.white a:visited {
     color: white;
 }
 
-header nav img{
+header nav img {
     border-radius: 50%;
 }
 
-a:link, 
+a:link,
 a:visited {
     color: black;
 }
 
-header address{
+header address {
     font-size: 0.9em;
     font-style: italic;
 }
 
 /*breite und zentrieren; Justify: blocksatz*/
-main{
+main {
     max-width: 70%;
     margin: auto;
 }
 
-main p{
+main p {
     text-align: justify;
-    font-family: 'Roboto Condensed';
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 main figure {
@@ -57,7 +56,7 @@ main figure {
     width: 100%;
 }
 
-main figure img{
+main figure img {
     border: 1px solid black;
 }
 
@@ -69,12 +68,12 @@ main figure img{
 }
 
 /*andere aufzählungszeichen für liste*/
-main ul{
+main ul {
     list-style-type: circle;
 }
 
 /*elemente innerhalb einer zeile links oder rechts positionieren*/
-footer .next{
+footer .next {
     float: right;
 }
 
@@ -99,12 +98,17 @@ footer {
     main {
         max-width: 90%;
     }
+
+    figure img {
+        width: 100%;
+    }
 }
 
 /*vw=viweport width=breite, die max am bildschirm angezeigt werden kann*/
 @media screen and (max-width: 1280px) {
     header img.banner {
-        width: 100vw; 
+        width: 100vw;
     }
 }
+
 /*Icons in webseite einbauen*/
