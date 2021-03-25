@@ -18,11 +18,22 @@ const map = L.map("map", {
     ]
 });
 
-//for-Schleife und if-Abfrage
 
+let nav = document.querySelector("#navigation");
+console.log(nav);
+
+ROUTE.sort((stop1, stop2) => {
+    return stop1.nr > stop2.nr;
+})
+
+//for-Schleife und if-Abfrage
 //console.log(ROUTE);
 for (let entry of ROUTE) {
-    console.log(entry);
+    //console.log(entry);
+    
+    nav.innerHTML += `
+    <option value="${entry.user}">Stop ${entry.nr}: ${entry.name}</option>
+    `;
     let mrk = L.marker([entry.lat, entry.lng]).addTo(map);
     mrk.bindPopup(`
         <h4>Stop ${entry.nr}: ${entry.name}</h4>
@@ -36,7 +47,7 @@ for (let entry of ROUTE) {
 }
 
 
-//<option value="SandraLeutner">Auckland</option>
+
         
 
 //console.log(document.querySelector("#map"));
