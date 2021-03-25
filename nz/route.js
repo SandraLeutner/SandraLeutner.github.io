@@ -9,7 +9,7 @@ const ROUTE = [{
     nr: 16,
     name: "Pancake Rocks",
     lat: -42.118611,
-    long: 171.326944,
+    lng: 171.326944,
     user: "timeastwood6020",
     wikipedia: "https://de.wikipedia.org/wiki/Pancake_Rocks"
 }, {
@@ -60,7 +60,7 @@ const ROUTE = [{
     lat: -41.293056,
     lng: 174.001944,
     user: "maximilianender",
-    Wikipedia: "https://en.wikipedia.org/wiki/Picton,_New_Zealand",
+    wikipedia: "https://en.wikipedia.org/wiki/Picton,_New_Zealand",
 }, {
     nr: 20,
     name: "Wellington",
@@ -112,7 +112,7 @@ const ROUTE = [{
     wikipedia: "https://de.wikipedia.org/wiki/Milford_Sound"
 }, {
     nr: 7,
-    name: "Dunedine",
+    name: "Dunedin",
     lat: -45.874167,
     lng: 170.503611,
     user: "annaklara123",
@@ -133,6 +133,7 @@ const ROUTE = [{
     wikipedia: "https://en.wikipedia.org/wiki/Wanaka"
 }, {
     nr: 5,
+    name: "Oamaru",
     lat: -45.09746,
     lng: 170.96911,
     user: "marlene353",
@@ -164,7 +165,7 @@ const ROUTE = [{
     lat: -41.293056,
     lng: 174.001944,
     user: "maximilianender",
-    Wikipedia: "https://en.wikipedia.org/wiki/Picton,_New_Zealand",
+    wikipedia: "https://en.wikipedia.org/wiki/Picton,_New_Zealand",
 }, {
     nr: 18,
     name: "Abel Tasman National Park",
@@ -179,4 +180,4 @@ const ROUTE = [{
     lng: 172.8381,
     user: "AnnaKeuschnigg",
     wikipedia: "https://en.wikipedia.org/wiki/Lake_Rotoiti_(Tasman)"
-}]
+}];
