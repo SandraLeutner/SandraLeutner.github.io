@@ -24,4 +24,5 @@ const map = L.map("map", {
       <p><i class='fas fa-external-link-alt mr-3'></i><a href='${stop.wikipedia}'>Read about stop in Wikipedia</a></p>
   `).openPopup();
   
+console.log()
   //console.log(document.querySelector("#map"));
