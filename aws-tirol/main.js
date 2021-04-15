@@ -46,7 +46,10 @@ fetch(awsUrl).then(response => response.json ())
             `<h3>${station.properties.name}</h3>
             <ul>
                 <li>Datum: ${formattedDate.toLocaleString("de")}</li>
-                <li>Temperatur: ${station.properties.LT} C</li>
+                <li>Temperatur: ${station.properties.LT} C</li>            
+                <li>Schneehöhe: ${station.properties.HS} cm</li>
+                <li>Luftfeuchtigkeit: ${station.properties.RH} %</li>
+                <li>Stationshöhe: ${station.geometry.coordinates[2]} m</li>
             </ul>
             `);
         marker.addTo(awsLayer);
