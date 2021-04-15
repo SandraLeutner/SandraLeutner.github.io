@@ -33,13 +33,24 @@ fetch(awsUrl).then(response => response.json ())
     .then(json => {
     console.log('Daten konvertiert: ', json);
     //for schleife -> auf jede station zugreifen; lat und lon bei json umgekehrt
-    for (station of json.features){
-        console.log('Station: ', station);
-        let marker = L.marker(
-            [station.geometry.coordinates[1], 
-            station.geometry.coordinates[0]]
-            );
-            marker.bindPopup('<h3>${station.properties.name}</h3>');
-            marker.addTo(awsLayer);
+    for (station of json.features) {
+        let marker = L.marker([
+            station.geometry.coordinates[1],
+            station.geometry.coordinates[0]
+        ]);
+
+        //datumsobjekt in formatted date --> funktionen anwendbar darauf
+        let formattedDate = new Date(station.properties.date);
+
+        marker.bindPopup(
+            `<h3>${station.properties.name}</h3>
+            <ul>
+                <li>Datum: ${formattedDate.toLocaleString("de")}</li>
+                <li>Temperatur: ${station.properties.LT} C</li>
+            </ul>
+            `);
+        marker.addTo(awsLayer);
     }
+    //set map view to all stations
+    map.fitBounds(awsLayer.getBounds());
 });
