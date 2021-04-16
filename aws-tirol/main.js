@@ -25,13 +25,19 @@ let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 //feature group: kann man an und ausschalten und man kann für alle wetterstationen etwas anwenden
 let awsLayer = L.featureGroup();
 layerControl.addOverlay(awsLayer, "Wetterstationen Tirol");
+
 // awsLayer.addTo(map);
 let snowLayer = L.featureGroup();
 layerControl.addOverlay(snowLayer, "Schneehöhen");
+
 //snowLayer.addTo(map);
 let windLayer = L.featureGroup();
 layerControl.addOverlay(windLayer, "Windgeschwindigkeit (km/h)");
-windLayer.addTo(map);
+
+//Lufttemperaturlayer
+let tempLayer = L.featureGroup();
+layerControl.addOverlay(tempLayer, "Lufttemperatur");
+tempLayer.addTo(map);
 
 //Seite im Web laden und auf awsUrl zugreifen und Marker zur Karte hinzufügen
 //fetch aufruf ladet fehleranfälliges aus dem internet, daher angemessene reaktion
@@ -104,6 +110,8 @@ fetch(awsUrl).then(response => response.json())
                 });
                 windMarker.addTo(windLayer);
             }
+
+
         }
         //set map view to all stations
         map.fitBounds(awsLayer.getBounds());
