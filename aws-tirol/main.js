@@ -1,5 +1,6 @@
 let basemapGray = L.tileLayer.provider('BasemapAT.grau');
 
+//https://leafletjs.com/reference-1.7.1.html#map
 let map = L.map("map", {
     center: [47, 11],
     zoom: 9,
@@ -7,6 +8,10 @@ let map = L.map("map", {
         basemapGray
     ]
 });
+
+//https://leafletjs.com/reference-1.7.1.html#control
+//https://leafletjs.com/reference-1.7.1.html#tilelayer
+//https://leafletjs.com/reference-1.7.1.html#layergroup
 
 //zwischen Layern hin und herschalten bzw Layer hinzufügen, provider Plugin
 let layerControl = L.control.layers({
@@ -21,6 +26,8 @@ let layerControl = L.control.layers({
 
 let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 
+
+//https://leafletjs.com/reference-1.7.1.html#featuregroup
 
 //feature group: kann man an und ausschalten und man kann für alle wetterstationen etwas anwenden
 let awsLayer = L.featureGroup();
@@ -40,8 +47,11 @@ layerControl.addOverlay(tempLayer, "Lufttemperatur");
 tempLayer.addTo(map);
 
 
-//Seite im Web laden und auf awsUrl zugreifen und Marker zur Karte hinzufügen
-//fetch aufruf ladet fehleranfälliges aus dem internet, daher angemessene reaktion
+//https://leafletjs.com/reference-1.7.1.html#marker
+
+/*Seite im Web laden und auf awsUrl zugreifen und Marker zur Karte hinzufügen
+fetch aufruf ladet fehleranfälliges aus dem internet, daher angemessene reaktion*/
+
 fetch(awsUrl).then(response => response.json())
     .then(json => {
         console.log('Daten konvertiert: ', json);
@@ -78,6 +88,8 @@ fetch(awsUrl).then(response => response.json())
                 if (station.properties.HS > 200) {
                     highlightClass = 'snow-200';
                 }
+
+//https://leafletjs.com/reference-1.7.1.html#divicon
 
                 let snowIcon = L.divIcon({
                     html: `<div class = "snow-label ${highlightClass}">${station.properties.HS}</div>`
@@ -144,4 +156,3 @@ fetch(awsUrl).then(response => response.json())
     });
 
 //leaflet -> bibliothek, um karten zu zeichnen; funktionen mit L. aufrufbar und mit src="..." in html eingebunden
-//
