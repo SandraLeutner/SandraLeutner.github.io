@@ -112,15 +112,15 @@ fetch(awsUrl).then(response => response.json())
                 windMarker.addTo(windLayer);
             }
 
-              //LUFTTEMPERATUR
-            if (station.properties.LT){
+            //LUFTTEMPERATUR
+            if (station.properties.LT) {
                 let tempHighlightClass = '';
 
-                if (station.properties.LT >= 0){
+                if (station.properties.LT >= 0) {
                     tempHighlightClass = 'temp-pos';
                 }
 
-                if (station.properties.LT < 0){
+                if (station.properties.LT < 0) {
                     tempHighlightClass = 'temp-neg';
                 }
 
