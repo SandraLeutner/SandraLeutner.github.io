@@ -49,8 +49,19 @@ L.control.scale({
     position: 'bottomright'
 }).addTo(map);
 
-let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 
+let newLabel = (coords, options) => {
+    console.log("Koordinaten coords: ", coords);
+    console.log("Optionsobjekt: ", options);
+    let marker = L.marker([coords[1], coords[0]]);
+    console.log("Marker: ", marker);
+    return marker;
+    //Label erstellen
+    //den Label zurückgeben
+};
+
+//newLabel(...,...).addTo(overlays.temperature)
+let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 
 //https://leafletjs.com/reference-1.7.1.html#marker
 
@@ -94,8 +105,6 @@ fetch(awsUrl).then(response => response.json())
                     highlightClass = 'snow-200';
                 }
 
-//https://leafletjs.com/reference-1.7.1.html#divicon
-
                 let snowIcon = L.divIcon({
                     html: `<div class = "snow-label ${highlightClass}">${station.properties.HS}</div>`
                 })
@@ -132,30 +141,11 @@ fetch(awsUrl).then(response => response.json())
             //LUFTTEMPERATUR
             //mit typeof wird Typ abgefragt -> mit "number" wird definiert, dass Nummer in stations.properties.LT drin ist
             if (typeof station.properties.LT =="number") {
-                let tempHighlightClass = '';
-
-                if (station.properties.LT >= 0) {
-                    tempHighlightClass = 'temp-pos';
-                }
-
-                if (station.properties.LT < 0) {
-                    tempHighlightClass = 'temp-neg';
-                }
-
-                let tempIcon = L.divIcon({
-                    html: `<div class="temp-label ${tempHighlightClass}">${station.properties.LT}</div>`,
+                let marker = newLabel(station.geometry.coordinates, {
+                    value: station.properties.LT
                 });
-
-                let tempMarker = L.marker([
-                    station.geometry.coordinates[1],
-                    station.geometry.coordinates[0],
-                ], {
-                    icon: tempIcon
-                });
-                tempMarker.addTo(overlays.temperature);
+                marker.addTo(overlays.temperature);
             }
-
-
         }
         //set map view to all stations
         map.fitBounds(overlays.stations.getBounds());
