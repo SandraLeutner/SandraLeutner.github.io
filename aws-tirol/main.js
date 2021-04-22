@@ -38,9 +38,16 @@ let layerControl = L.control.layers({
     "Schneehöhe (cm)": overlays.snowheight,
     "Windgeschwindigkeit (km/h)": overlays.windspeed,
     "Windrichtung": overlays.winddirection
+},{
+    collapsed: false
 }).addTo(map);
 
 overlays.temperature.addTo(map);
+
+L.control.scale({
+    imperial: false, 
+    position: 'bottomright'
+}).addTo(map);
 
 let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 
@@ -78,7 +85,7 @@ fetch(awsUrl).then(response => response.json())
             `);
             marker.addTo(overlays.stations);
             //SCHNEE
-            if (station.properties.HS) {
+            if (typeof station.properties.HS =="number") {
                 let highlightClass = '';
                 if (station.properties.HS > 100) {
                     highlightClass = 'snow-100';
@@ -102,7 +109,7 @@ fetch(awsUrl).then(response => response.json())
             }
 
             //WIND
-            if (station.properties.WG) {
+            if (typeof station.properties.WG =="number") {
                 let windHighlightClass = '';
                 if (station.properties.WG > 10) {
                     windHighlightClass = 'wind-10';
@@ -123,7 +130,8 @@ fetch(awsUrl).then(response => response.json())
             }
 
             //LUFTTEMPERATUR
-            if (station.properties.LT) {
+            //mit typeof wird Typ abgefragt -> mit "number" wird definiert, dass Nummer in stations.properties.LT drin ist
+            if (typeof station.properties.LT =="number") {
                 let tempHighlightClass = '';
 
                 if (station.properties.LT >= 0) {
