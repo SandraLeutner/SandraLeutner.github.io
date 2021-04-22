@@ -66,7 +66,8 @@ let newLabel = (coords, options) => {
         className: "text-label"
     })
     let marker = L.marker([coords[1], coords[0]],{
-        icon: label
+        icon: label,
+        title: `${options.station} (${coords[2]}m)`
     });
     return marker;
     //Label erstellen
@@ -112,8 +113,9 @@ fetch(awsUrl).then(response => response.json())
             //SCHNEE
             if (typeof station.properties.HS =="number") {
                 let marker = newLabel(station.geometry.coordinates, {
-                    value: station.properties.HS,
-                    colors: COLORS.snowheight
+                    value: station.properties.HS.toFixed(0),
+                    colors: COLORS.snowheight,
+                    station: station.properties.name
                 });
                 marker.addTo(overlays.snowheight);
             }
@@ -121,8 +123,9 @@ fetch(awsUrl).then(response => response.json())
             //WIND
             if (typeof station.properties.WG =="number") {
                 let marker = newLabel(station.geometry.coordinates, {
-                    value: station.properties.WG,
-                    colors: COLORS.windspeed
+                    value: station.properties.WG.toFixed(0),
+                    colors: COLORS.windspeed,
+                    station: station.properties.name
                 });
                 marker.addTo(overlays.windspeed);
             }
@@ -131,8 +134,9 @@ fetch(awsUrl).then(response => response.json())
             //mit typeof wird Typ abgefragt -> mit "number" wird definiert, dass Nummer in stations.properties.LT drin ist
             if (typeof station.properties.LT =="number") {
                 let marker = newLabel(station.geometry.coordinates, {
-                    value: station.properties.LT,
-                    colors: COLORS.temperature
+                    value: station.properties.LT.toFixed(1),
+                    colors: COLORS.temperature,
+                    station: station.properties.name
                 });
                 marker.addTo(overlays.temperature);
             }
