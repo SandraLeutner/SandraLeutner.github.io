@@ -61,7 +61,7 @@ let getColor = (value, colorRamp) => {
     return "black";
 };
 
-let getDirections = (value, dirRamp) => {
+let getDirection = (value, dirRamp) => {
     for (let rule of dirRamp){
         if(value >= rule.min && value < rule.max){
             return rule.dir;
@@ -117,11 +117,13 @@ fetch(awsUrl).then(response => response.json())
                 <li>Schneehöhe: ${station.properties.HS || '?'} cm</li>          
                 <li>Luftfeuchtigkeit: ${station.properties.RH || '?'} %</li>
                 <li>Windgeschwindigkeit: ${station.properties.WG || '?'} km/h</li>
-                <li> Windrichtung: ${station.properties.WR || '?'}</li>
+                <li>Windrichtung: ${station.properties.WR || '?'}</li>
             </ul>
             <a target="_blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
             `);
             marker.addTo(overlays.stations);
+
+
             //SCHNEE
             if (typeof station.properties.HS =="number") {
                 let marker = newLabel(station.geometry.coordinates, {
@@ -162,6 +164,16 @@ fetch(awsUrl).then(response => response.json())
                 });
                 marker.addTo(overlays.humidity);
             }
+
+            //Windrichtung
+            /*if (typeof station.properties.WR == "number") {
+                let marker = newLabel(station.geometry.coordinates, {
+                    value: station.properties.WR,
+                    directions: DIRECTIONS,
+                    station: station.properties.name
+                });
+                marker.addTo(overlays.winddirection);
+            }*/
 
 
         }
