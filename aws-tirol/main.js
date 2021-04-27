@@ -61,6 +61,16 @@ let getColor = (value, colorRamp) => {
     return "black";
 };
 
+let getDirections = (value, dirRamp) => {
+    for (let rule of dirRamp){
+        if(value >= rule.min && value < rule.max){
+            return rule.dir;
+        }
+        console.log(rule)
+    }
+    return "no data";
+};
+
 let newLabel = (coords, options) => {
     let color = getColor(options.value, options.colors);
     let label = L.divIcon({
