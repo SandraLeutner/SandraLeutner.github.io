@@ -143,6 +143,17 @@ fetch(awsUrl).then(response => response.json())
                 marker.addTo(overlays.temperature);
             }
 
+            //Relative Luftfeuchtigkeit
+            if (typeof station.properties.RH =="number") {
+                let marker = newLabel(station.geometry.coordinates, {
+                    value: station.properties.RH.toFixed(0),
+                    colors: COLORS.humidity,
+                    station: station.properties.name
+                });
+                marker.addTo(overlays.humidity);
+            }
+
+
         }
         //set map view to all stations
         map.fitBounds(overlays.stations.getBounds());
