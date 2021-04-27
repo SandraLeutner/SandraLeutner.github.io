@@ -19,7 +19,8 @@ let overlays = {
     temperature: L.featureGroup(),
     snowheight: L.featureGroup(),
     windspeed: L.featureGroup(),
-    winddirection: L.featureGroup()
+    winddirection: L.featureGroup(),
+    humidity: L.featureGroup()
 };
 
 //zwischen Layern hin und herschalten bzw Layer hinzufügen, provider Plugin
@@ -37,7 +38,8 @@ let layerControl = L.control.layers({
     "Temperatur (°C)": overlays.temperature,
     "Schneehöhe (cm)": overlays.snowheight,
     "Windgeschwindigkeit (km/h)": overlays.windspeed,
-    "Windrichtung": overlays.winddirection
+    "Windrichtung": overlays.winddirection,
+    "Relative Luftfeuchtigkeit (%)": overlays.humidity
 },{
     collapsed: false
 }).addTo(map);
@@ -60,7 +62,7 @@ let getColor = (value, colorRamp) => {
 };
 
 let newLabel = (coords, options) => {
-    let color = getColor(options.value, options.colors)
+    let color = getColor(options.value, options.colors);
     let label = L.divIcon({
         html: `<div style ="background-color:${color}">${options.value}</div>`,
         className: "text-label"
@@ -140,6 +142,7 @@ fetch(awsUrl).then(response => response.json())
                 });
                 marker.addTo(overlays.temperature);
             }
+
         }
         //set map view to all stations
         map.fitBounds(overlays.stations.getBounds());
