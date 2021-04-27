@@ -165,16 +165,6 @@ fetch(awsUrl).then(response => response.json())
                 marker.addTo(overlays.humidity);
             }
 
-            //Windrichtung
-            /*if (typeof station.properties.WR == "number") {
-                let marker = newLabel(station.geometry.coordinates, {
-                    value: station.properties.WR,
-                    directions: DIRECTIONS,
-                    station: station.properties.name
-                });
-                marker.addTo(overlays.winddirection);
-            }*/
-
 
         }
         //set map view to all stations
