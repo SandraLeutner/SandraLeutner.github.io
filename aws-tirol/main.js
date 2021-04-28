@@ -23,37 +23,50 @@ let overlays = {
     humidity: L.featureGroup()
 };
 
+//Rainviewer
+/*let rainviewer = L.control.rainviewer({
+    position: 'bottomleft',
+    nextButtonText: '>',
+    playStopButtonText: 'Start/Stop',
+    prevButtonText: '<',
+    positionSliderLabelText: "Time:",
+    opacitySliderLabelText: "Opacity:",
+    animationInterval: 500,
+    opacity: 0.5
+});*/
+
 //zwischen Layern hin und herschalten bzw Layer hinzufügen, provider Plugin
 let layerControl = L.control.layers({
-    "BasemapAT.grau": basemapGray,
-    "BasemapAT.orthofoto": L.tileLayer.provider('BasemapAT.orthofoto'),
-    "BasemapAT.surface": L.tileLayer.provider('BasemapAT.surface'),
-    "BasemapAT.overlay+ortho": L.layerGroup([
-        L.tileLayer.provider('BasemapAT.orthofoto'),
-        L.tileLayer.provider('BasemapAT.overlay')
-    ])
-}, 
-{
-    "Wetterstationen Tirol": overlays.stations,
-    "Temperatur (°C)": overlays.temperature,
-    "Schneehöhe (cm)": overlays.snowheight,
-    "Windgeschwindigkeit (km/h)": overlays.windspeed,
-    "Windrichtung": overlays.winddirection,
-    "Relative Luftfeuchtigkeit (%)": overlays.humidity
-},{
-    collapsed: false
-}).addTo(map);
+        "BasemapAT.grau": basemapGray,
+        "BasemapAT.orthofoto": L.tileLayer.provider('BasemapAT.orthofoto'),
+        "BasemapAT.surface": L.tileLayer.provider('BasemapAT.surface'),
+        "BasemapAT.overlay+ortho": L.layerGroup([
+            L.tileLayer.provider('BasemapAT.orthofoto'),
+            L.tileLayer.provider('BasemapAT.overlay')
+        ]),
+    },
+
+    {
+        "Wetterstationen Tirol": overlays.stations,
+        "Temperatur (°C)": overlays.temperature,
+        "Schneehöhe (cm)": overlays.snowheight,
+        "Windgeschwindigkeit (km/h)": overlays.windspeed,
+        "Windrichtung": overlays.winddirection,
+        "Relative Luftfeuchtigkeit (%)": overlays.humidity
+    }, {
+        collapsed: false
+    }).addTo(map);
 
 overlays.temperature.addTo(map);
 
 L.control.scale({
-    imperial: false, 
+    imperial: false,
     position: 'bottomright'
 }).addTo(map);
 
 let getColor = (value, colorRamp) => {
-    for(let rule of colorRamp){
-        if(value >= rule.min && value < rule.max){
+    for (let rule of colorRamp) {
+        if (value >= rule.min && value < rule.max) {
             return rule.col;
         }
         console.log(rule)
@@ -62,8 +75,8 @@ let getColor = (value, colorRamp) => {
 };
 
 let getDirection = (value, dirRamp) => {
-    for (let rule of dirRamp){
-        if(value >= rule.min && value < rule.max){
+    for (let rule of dirRamp) {
+        if (value >= rule.min && value < rule.max) {
             return rule.dir;
         }
         console.log(rule)
@@ -77,7 +90,7 @@ let newLabel = (coords, options) => {
         html: `<div style ="background-color:${color}">${options.value}</div>`,
         className: "text-label"
     })
-    let marker = L.marker([coords[1], coords[0]],{
+    let marker = L.marker([coords[1], coords[0]], {
         icon: label,
         title: `${options.station} (${coords[2]}m)`
     });
@@ -125,7 +138,7 @@ fetch(awsUrl).then(response => response.json())
 
 
             //SCHNEE
-            if (typeof station.properties.HS =="number") {
+            if (typeof station.properties.HS == "number") {
                 let marker = newLabel(station.geometry.coordinates, {
                     value: station.properties.HS.toFixed(0),
                     colors: COLORS.snowheight,
@@ -135,7 +148,7 @@ fetch(awsUrl).then(response => response.json())
             }
 
             //WIND
-            if (typeof station.properties.WG =="number") {
+            if (typeof station.properties.WG == "number") {
                 let marker = newLabel(station.geometry.coordinates, {
                     value: station.properties.WG.toFixed(0),
                     colors: COLORS.windspeed,
@@ -146,7 +159,7 @@ fetch(awsUrl).then(response => response.json())
 
             //LUFTTEMPERATUR
             //mit typeof wird Typ abgefragt -> mit "number" wird definiert, dass Nummer in stations.properties.LT drin ist
-            if (typeof station.properties.LT =="number") {
+            if (typeof station.properties.LT == "number") {
                 let marker = newLabel(station.geometry.coordinates, {
                     value: station.properties.LT.toFixed(1),
                     colors: COLORS.temperature,
@@ -156,7 +169,7 @@ fetch(awsUrl).then(response => response.json())
             }
 
             //Relative Luftfeuchtigkeit
-            if (typeof station.properties.RH =="number") {
+            if (typeof station.properties.RH == "number") {
                 let marker = newLabel(station.geometry.coordinates, {
                     value: station.properties.RH.toFixed(0),
                     colors: COLORS.humidity,
