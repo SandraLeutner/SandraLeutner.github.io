@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital@0;1&family=Roboto+Condensed:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+    <title>New Zealand Journey - Auckland</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet-src.min.js"></script>
+    <link rel="stylesheet" href="main.css">
+    <script src="route.js"></script>
+    <script defer src="main.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <img class="banner" src="images/header.jpg" alt="Auckland" />
+        <!-- Absatz mit Link zur Bildquelle (Bildautor als Linktext) -->
+        <p class="white"><a
+                href="https://pixabay.com/photos/auckland-skyline-sunset-new-zealand-4639321/">Squirrel_photos</a></p>
+        <h1>New Zealand Journey: Auckland</h1>
+        <!-- nav-Element mit: -->
+        <!-- Bild images/user.jpg 100x100 Pixel von euch, pixabay oder wikimedia mit sprechendem alt-Text - Bild als Link zur Bildquelle -->
+        <!-- address-Element mit: -->
+        <!-- E-Maillink mit Name als Linktext -->
+        <!-- Link zum github-Repo (Beides getrennt durch " - ")-->
+        <nav>
+            <a href="https://pixabay.com/photos/gollum-wax-figure-branson-472144/">
+                <img src="images/user.jpg" alt="Gollum Wax Figure">
+            </a>
+            <address>
+                <a href="mailto:sandra.leutner@student.uibk.ac.at"><i class="fas fa-envelope-square mr-3"></i>Sandra
+                    Leutner</a>-
+                <a href="https://github.com/SandraLeutner/SandraLeutner.github.io"><i
+                        class="fab fa-github mr-3"></i>Github Repo</a>
+            </address>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <!-- main-Element mit: -->
+        <!-- Überschrift 1 mit Etappentitel und "Teaser" -->
+        <h1>Auckland</h1>
+        <!-- Absatz mit Beschreibung der Etappe aus der Wikipedia mit Link zur Quelle bei Wikipedia (Quelle: Link) -->
+        <p>
+            Auckland (Māori: Tāmaki Makaurau) is a large metropolitan city in the North Island of New Zealand. <br>The
+            most populous urban area in the country, Auckland has an urban population of about 1,470,100 (June 2020). It
+            is located in the Auckland Region—the area governed by Auckland Council—which includes outlying rural areas
+            and the islands of the Hauraki Gulf, resulting in a total population of 1,717,500. <br>While Europeans
+            continue to make up the plurality of Auckland's population, the city became multicultural and cosmopolitan
+            in the late-20th century, with Asians accounting for 31% of the city's population in 2018. Auckland is also
+            home to the largest Polynesian population in the world. The Māori-language name for Auckland is Tāmaki
+            Makaurau, meaning "Tāmaki desired by many", in reference to the desirability of its natural resources and
+            geography.
+            (Quelle:<a href="https://en.wikipedia.org/wiki/Auckland">Wikipedia</a>)
+        </p>
+
+        <!-- Überschrift 2 für ein Bild passend zur Etappe -->
+        <h2>Auckland Ferry Terminal</h2>
+        <!-- Bild als figure-Element mit: -->
+        <!-- Bild images/attraction.jpg 900x600px und sprechendem alt-Text -->
+        <!-- Bildunterschrift als figcaption-Element mit Link auf Bildquelle und BildautorIn -->
+        <figure>
+            <img src="images/attraction.jpg" alt="Architecture of Auckland" />
+            <figcaption><i class="fas fa-camera-retro mr-3"></i> Architecure of Auckland. Bild: <a
+                    href="https://pixabay.com/photos/auckland-new-zealand-new-and-old-216820/">dave73y</a></figcaption>
+        </figure>
+        <!-- Absatz mit Beschreibung des Bildes aus der Wikipedia mit Link zur Quelle bei Wikipedia (Quelle: Link) -->
+
+        <P>
+            The Auckland Ferry Terminal, sometimes called the Downtown Ferry Terminal or simply Ferry Building, is the
+            hub of the Auckland ferry network that connects Auckland City with suburbs in North Shore, west Auckland,
+            and south Auckland, and islands in the Waitematā Harbour and Hauraki Gulf. The ferry terminal is in the
+            Auckland CBD on the Auckland waterfront. It is at the north end of Queen Street, opposite the Britomart
+            Transport Centre, which is the hub for local buses and trains.
+            (Quelle:<a href="https://en.wikipedia.org/wiki/Auckland_Ferry_Terminal">Wikipedia</a>)
+        </P>
+
+        <!-- Überschrift 3 mit dem Inhalt "Overview map" -->
+        <h3>Overview map</h3>
+        <div id="map"></div>
+
+        <!--pull-down Menü-->
+        <label for="navigation">Route navigation:</label>
+        <select id="navigation">
+            </select>
+
+        <h3>Links</h3>
+        <ul>
+            <li><a href="https://architectureau.com/articles/an-architectural-guide-to-auckland/">Architectural Guide to
+                    Auckland</a></li>
+            <li><a
+                    href="https://www.engineeringnz.org/programmes/heritage/heritage-records/auckland-ferry-terminal-building/">Ferry
+                    Terminal Building</a></li>
+            <li><a href="https://www.planetware.com/tourist-attractions-/auckland-nz-au-a.htm">Tourist Attractions in
+                    Auckland</a></li>
+            <li><a href="https://www.aucklandisite.com/">Auckland Tourist Information</a></li>
+        </ul>
+        <!-- Überschrift 3 mit dem Inhalt "Links" -->
+        <!-- ungeordnete Liste mit mindestens 4 Links passend zum Thema der Etappe -->
+
+    </main>
+
+    <!-- horizontale Linie -->
+    <hr>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
+
+    <!-- footer-Element mit: -->
+    <footer>
+        <!-- nav-Element mit: -->
+        <!-- Link zur vorhergehenden Etappe nach dem Muster https://username.github.io/nz/ - Linktext ist der Name der Etappe (username siehe Etappenverteilung) -->
+        <!-- Link zur nächsten Etappe nach dem Muster https://username.github.io/nz/ - Linktext ist der Name der Etappe (username siehe Etappenverteilung) -->
+        <nav>
+            <a class="back" href="https://jo3093.github.io/nz/index.html"><i
+                    class="fas fa-arrow-circle-left mr-3"></i>Rotorua</a>
+            <a class="next" href="https://jbaumgartner1983.github.io/nz/index.html">Christchurch<i
+                    class="fas fa-arrow-circle-right ml-3"></i></a>
+        </nav>
+    </footer>
+
+</body>
+
+</html>

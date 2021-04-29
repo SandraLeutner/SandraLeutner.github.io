@@ -1,0 +1,114 @@
+/*Maximale Breite setzen und Inhalt zentrieren, Schriftarten festsetzen*/
+body {
+    max-width: 1280px;
+    margin: auto;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/*überschrift im header bereich zentrieren; 
+dann paragraph innerhalb des headers, padding bedeutet, dass sie nicht ganz am rand klebt
+*/
+header {
+    text-align: center;
+}
+
+header p {
+    text-align: right;
+    font-weight: bold;
+    font-size: 0.8em;
+    padding-right: 1em;
+    margin-top: -2em;
+}
+
+.white,
+.white a:link,
+.white a:visited {
+    color: white;
+}
+
+header nav img {
+    border-radius: 50%;
+}
+
+a:link,
+a:visited {
+    color: black;
+}
+
+header address {
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+/*breite und zentrieren; Justify: blocksatz*/
+main {
+    max-width: 70%;
+    margin: auto;
+}
+
+main p {
+    text-align: justify;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+main figure {
+    margin-left: 0;
+    width: 100%;
+}
+
+main figure img {
+    border: 1px solid black;
+}
+
+/*border für map definieren und umranden*/
+#map {
+    height: 360px;
+    width: 100%;
+    border: 1px solid gray;
+}
+
+/*andere aufzählungszeichen für liste*/
+main ul {
+    list-style-type: circle;
+}
+
+/*elemente innerhalb einer zeile links oder rechts positionieren*/
+footer .next {
+    float: right;
+}
+
+footer .back {
+    float: left;
+}
+
+footer {
+    padding: 1em 0 3em 0;
+}
+
+.mr-3 {
+    margin-right: 0.3em;
+}
+
+.ml-3 {
+    margin-left: 0.3em;
+}
+
+/*Darstellung am Handy*/
+@media screen and (max-width: 900px) {
+    main {
+        max-width: 90%;
+    }
+
+    figure img {
+        width: 100%;
+    }
+}
+
+/*vw=viweport width=breite, die max am bildschirm angezeigt werden kann*/
+@media screen and (max-width: 1280px) {
+    header img.banner {
+        width: 100vw;
+    }
+}
+
+/*Icons in webseite einbauen*/
