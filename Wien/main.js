@@ -49,8 +49,25 @@ overlays.busStops.addTo(map);
 overlays.pedAreas.addTo(map);
 
 
+let drawBusStop = (geojsonData) => {
+    L.geoJson(geojsonData, {
+        onEachFeature: (feature, layer) => {
+            layer.bindPopup(feature.properties.STAT_NAME)
+        },
+        pointToLayer: (geoJsonPoint, latlng) => {
+            return L.marker(latlng, {
+                icon: L.icon({
+                    iconUrl: "icons/busstop.png",
+                    iconSize: [35, 35]
+                })
+            })
+        }
+    }).addTo(map);
+}
+
+
 //Datensatz auf Karte visualisieren, Punktdatensatz
-fetch("data/TOURISTIKHTSVSLOGD.json")
+/*fetch("data/TOURISTIKHTSVSLOGD.json")
     .then(response => response.json())
     .then(stations => {
         L.geoJson(stations, {
@@ -66,4 +83,18 @@ fetch("data/TOURISTIKHTSVSLOGD.json")
                 })
             }
         }).addTo(map);
-    })
+    })*/
+
+
+// Schleife, die über ogdwien drüber läuft
+for (let config of OGDWIEN) {
+    console.log('Config: ', config.data);
+    fetch(config.data)
+        .then(response => response.json())
+        .then(geojsonData => {
+            console.log("Data: ", geojsonData);
+            if (config.title == "Haltestellen Vienna Sightseeing") {
+                drawBusStop(geojsonData);
+            }
+        })
+}
