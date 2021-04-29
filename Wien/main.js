@@ -49,6 +49,7 @@ overlays.busStops.addTo(map);
 overlays.pedAreas.addTo(map);
 
 
+//drawBusStop-Funktion schreiben
 let drawBusStop = (geojsonData) => {
     L.geoJson(geojsonData, {
         onEachFeature: (feature, layer) => {
@@ -68,26 +69,26 @@ let drawBusStop = (geojsonData) => {
     }).addTo(overlays.busStops);
 }
 
-
-//Datensatz auf Karte visualisieren, Punktdatensatz
-/*fetch("data/TOURISTIKHTSVSLOGD.json")
-    .then(response => response.json())
-    .then(stations => {
-        L.geoJson(stations, {
-            onEachFeature: (feature, layer) => {
-                layer.bindPopup(feature.properties.STAT_NAME)
-            },
-            pointToLayer: (geoJsonPoint, latlng) => {
-                return L.marker(latlng, {
-                    icon: L.icon({
-                        iconUrl: "icons/busstop.png",
-                        iconSize: [35, 35]
-                    })
-                })
+let drawBusLines = (geojsonData) => {
+    console.log('Bus Lines: ', geojsonData);
+    L.geoJson(geojsonData, {
+        style: (feature) => {
+            let col = "red";
+            if (feature.properties.LINE_NAME == 'Blue Line') {
+                col = "blue";
             }
-        }).addTo(map);
-    })*/
-
+            return {
+                color: col
+            }     
+        },
+        onEachFeature: (feature, layer) => {
+            layer.bindPopup(`<strong>${feature.properties.LINE_NAME}</strong>
+            <hr>
+            von ${feature.properties.FROM_NAME}<br>
+            nach ${feature.properties.TO_NAME}`)
+        }
+    }).addTo(overlays.busLines);
+}
 
 // Schleife, die über ogdwien drüber läuft
 for (let config of OGDWIEN) {
@@ -98,6 +99,8 @@ for (let config of OGDWIEN) {
             console.log("Data: ", geojsonData);
             if (config.title == "Haltestellen Vienna Sightseeing") {
                 drawBusStop(geojsonData);
+            } else if (config.title == "Liniennetz Vienna Sightseeing"){
+                drawBusLines (geojsonData);
             }
         })
 }
