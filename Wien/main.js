@@ -16,9 +16,9 @@ let baselayers = {
 // Overlays für die Themen zum Ein- und Ausschalten definieren
 let overlays = {
     busLines: L.featureGroup(),
-    busStops: L.featureGroup(),
+    busStops: L.markerClusterGroup(),
     pedAreas: L.featureGroup(),
-    tourAttr: L.featureGroup()
+    sights: L.markerClusterGroup()
 };
 
 // Karte initialisieren und auf Wiens Wikipedia Koordinate blicken
@@ -43,14 +43,14 @@ let layerControl = L.control.layers({
     "Liniennetz Vienna Sightseeing": overlays.busLines,
     "Haltestellen Vienna Sightseeing": overlays.busStops,
     "Fußgängerzonen": overlays.pedAreas,
-    "Sehenswürdigkeiten": overlays.tourAttr
+    "Sehenswürdigkeiten": overlays.sights
 }).addTo(map);
 
 // alle Overlays nach dem Laden anzeigen
 overlays.busLines.addTo(map);
 overlays.busStops.addTo(map);
 overlays.pedAreas.addTo(map);
-overlays.tourAttr.addTo(map);
+overlays.sights.addTo(map);
 
 let drawBusStop = (geojsonData) => {
     L.geoJson(geojsonData, {
@@ -110,7 +110,7 @@ let drawPedestrianAreas = (geojsonData) => {
     }).addTo(overlays.pedAreas);
 }
 
-let drawTouristAttr = (geojsonData) => {
+let drawSights = (geojsonData) => {
     console.log('Attraktion: ', geojsonData);
     L.geoJson(geojsonData, {
         onEachFeature: (feature, layer) => {
@@ -127,7 +127,7 @@ let drawTouristAttr = (geojsonData) => {
                 })
             })
         },
-    }).addTo(overlays.tourAttr);
+    }).addTo(overlays.sights);
 }
 
 for (let config of OGDWIEN) {
@@ -143,7 +143,7 @@ for (let config of OGDWIEN) {
             } else if (config.title === "Fußgängerzonen") {
                 drawPedestrianAreas(geojsonData);
             } else if (config.title == "Sehenswürdigkeiten") {
-                drawTouristAttr(geojsonData);
+                drawSights(geojsonData);
             }
         })
 }
