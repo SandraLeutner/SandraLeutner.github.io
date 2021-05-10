@@ -163,7 +163,7 @@ L.hash(map);
 //Reachability 
 
 let styleIntervals = (feature) => {
-    let color = ""; 
+    let color = "";
     let range = feature.properties.Range;
     if (feature.properties.Measure === "time") {
         color = COLORS.minutes[range];
@@ -200,4 +200,3 @@ L.control.reachability({
     travelModeButton4Content: '',
     travelModeButton4StyleClass: 'fa fa-wheelchair fa-2x'
 }).addTo(map);
-
