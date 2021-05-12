@@ -184,4 +184,12 @@ fetch(awsUrl).then(response => response.json())
         map.fitBounds(overlays.stations.getBounds());
     });
 
-//leaflet -> bibliothek, um karten zu zeichnen; funktionen mit L. aufrufbar und mit src="..." in html eingebunden
+
+//Leaflet Minimap
+
+var miniMap = new L.Control.MiniMap(
+    L.tileLayer.provider("BasemapAT.grau"), {
+        toggleDisplay: true,
+        minimized: false
+    }
+).addTo(map);

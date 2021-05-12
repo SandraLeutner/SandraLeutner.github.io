@@ -64,6 +64,11 @@ nav.onchange = (evt) => {
 };
 
 
-        
+//Leaflet Minimap
 
-//console.log(document.querySelector("#map"));
+var miniMap = new L.Control.MiniMap(
+    L.tileLayer.provider("BasemapAT.basemap"), {
+        toggleDisplay: true,
+        minimized: false
+    }
+).addTo(map);
