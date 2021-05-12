@@ -13,6 +13,7 @@ console.log(stop);
 const map = L.map("map", {
     //center: [stop.lat, stop.lng],
     //zoom: 13,
+    fullscreenControl: true,
     layers: [
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
     ]
@@ -67,7 +68,7 @@ nav.onchange = (evt) => {
 //Leaflet Minimap
 
 var miniMap = new L.Control.MiniMap(
-    L.tileLayer.provider("BasemapAT.basemap"), {
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'), {
         toggleDisplay: true,
         minimized: false
     }
