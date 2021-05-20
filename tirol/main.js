@@ -21,7 +21,6 @@ let overlays = {
 
 // Karte initialisieren und auf Innsbrucks Wikipedia Koordinate blicken
 let map = L.map("map", {
-    fullscreenControl: true,
     center: [47.267222, 11.392778],
     zoom: 9,
     layers: [
@@ -43,11 +42,65 @@ let layerControl = L.control.layers({
 // Overlay mit GPX-Track anzeigen
 overlays.tracks.addTo(map);
 
-//21,SandraLeutner,Windegg - Matrei,Windegg,27 km,520 m,3 h,mittelschwierig,"Windegg, Ausgangspunkt und gleichzeit höchster Punkt dieser Tour, führt zur Gänze auf Asphaltstraßen bis nach Matrei am Brenner. Während der 27 Kilometer langen Tour genießen Sie nicht nur einen herrlichen Blick auf Innsbruck, sondern passieren auch die malerische Gemeinde Rinn mit ihrer bekannten Kirche, sowie die Orte Sistrans, Lans und Patsch.","Vom Gasthaus Windegg geht es über die Asphaltstraße hinunter nach Tulfes. Im Ort zweigt man links auf die Straße nach Rinn/Sistrans ab. Leicht auf und ab verläuft die Strecke durch Wiesen und Felder nach Rinn bis zum Kreisverkehr vor Sistrans. Hier zweigt man halblinks ab und erreicht nach einem weiteren Kilometer das Dorf (1 Stunde ab Windegg). Kurz vor der Kirche beim Dorfcafe geht es rechts ab nach Lans, wo man sich im Dorf an den Wegweiser Igls hält und 70 Meter danach nach Patsch abzweigt. Nun folgt ein Anstieg bis zur Olympia Bob- und Rodelbahn. Fast eben geht es weiter bis zur Abzweigung nach Innsbruck. Hier fährt man geradeaus weiter, vorbei am Grünwalderhof und gleich danach links nach Patsch. Auf dieser Straße radelt man bis ins Etappenziel. Auf den Westhängen des Wipptals fährt man durch die Streusiedlung Ellbögen zwischen Wiesen und Wäldchen, bis man zuerst Pfons und kurz danach Matrei erreicht (2 Stunden ab Sistrans).",https://www.tirol.at/reisefuehrer/sport/radfahren/biketouren/a-bike-trail-tirol-windegg-matrei
+const elevationControl = L.control.elevation({
+    elevationDiv: "#profile",
+    followMarker: false,
+    theme: 'lime-theme',
+}).addTo(map);
 
 const drawTrack = (nr) => {
-    console.log('Track: ', nr);
+    // console.log('Track: ', nr);
+    elevationControl.clear();
+    overlays.tracks.clearLayers();
+    let gpxTrack = new L.GPX(`tracks/${nr}.gpx`, {
+        async: true,
+        marker_options: {
+            startIconUrl: `icons/number_${nr}.png`,
+            endIconUrl: 'icons/finish.png',
+            shadowUrl: null,
+        },
+        polyline_options: {
+            color: 'black',
+            dashArray: [2, 5],
+        },
+    }).addTo(overlays.tracks);
+    gpxTrack.on("loaded", () => {
+        console.log('loaded gpx');
+        map.fitBounds(gpxTrack.getBounds());
+        console.log('Track name: ', gpxTrack.get_distance());
+        gpxTrack.bindPopup(`
+        <h3>${gpxTrack.get_name()}</h3>
+        <ul>
+            <li>Streckenlänge: ${gpxTrack.get_distance()} m</li>
+            <li>tiefster Punkt: ${gpxTrack.get_elevation_min()} m</li>
+            <li>höchster Punkt: ${gpxTrack.get_elevation_max()} m</li>
+            <li>Höhenmeter bergauf: ${gpxTrack.get_elevation_gain()} m</li>
+            <li>Höhenmeter bergab: ${gpxTrack.get_elevation_loss()} m</li>
+        </ul>
+        `);
+        // TODO: popup with
+        // Name, max_height, min_height, total_dist
+    });
+    elevationControl.load(`tracks/${nr}.gpx`);
 };
 
 const selectedTrack = 21;
 drawTrack(selectedTrack);
+
+console.log('biketirol json: ', BIKETIROL);
+let pulldown = document.querySelector("#pulldown");
+console.log('Pulldown: ', pulldown);
+let selected = '';
+for (let track of BIKETIROL) {
+    if(selectedTrack == track.nr) {
+        selected = 'selected';
+    } else {
+        selected = '';
+    }
+    pulldown.innerHTML += `<option ${selected} value="${track.nr}">${track.nr}: ${track.etappe}</option>`;
+}
+
+pulldown.onchange = () => {
+    console.log('changed!!!!!', pulldown.value);
+    drawTrack(pulldown.value);
+};
