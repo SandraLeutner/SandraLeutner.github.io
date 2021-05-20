@@ -101,6 +101,6 @@ for (let track of BIKETIROL) {
 }
 
 pulldown.onchange = () => {
-    console.log('changed!!!!!', pulldown.value);
+    //console.log('changed!!', pulldown.value);
     drawTrack(pulldown.value);
 };
