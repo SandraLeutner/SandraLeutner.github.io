@@ -48,6 +48,8 @@ const elevationControl = L.control.elevation({
     theme: 'lime-theme',
 }).addTo(map);
 
+//Funktion zum Zeichnen eines Tracks inkl. Höhenprofil; alle Tracks haben gleiche Bezeichnung und können mit Nummer aufgerufen werden; dann Marker Start und Ende stylen
+//im letzten Schritt wird Polyline gestylt
 const drawTrack = (nr) => {
     // console.log('Track: ', nr);
     elevationControl.clear();
@@ -64,6 +66,7 @@ const drawTrack = (nr) => {
             dashArray: [2, 5],
         },
     }).addTo(overlays.tracks);
+
     gpxTrack.on("loaded", () => {
         console.log('loaded gpx');
         map.fitBounds(gpxTrack.getBounds());
@@ -82,17 +85,21 @@ const drawTrack = (nr) => {
         // Name, max_height, min_height, total_dist
     });
     elevationControl.load(`tracks/${nr}.gpx`);
+    elevationControl.on('eledata_loaded', (evt) => {
+        activeElevationTrack = evt.layer;
+    });
 };
 
 const selectedTrack = 21;
 drawTrack(selectedTrack);
 
+//Schleife zum Aufbau des Dropdown Menüs
 console.log('biketirol json: ', BIKETIROL);
 let pulldown = document.querySelector("#pulldown");
 console.log('Pulldown: ', pulldown);
 let selected = '';
 for (let track of BIKETIROL) {
-    if(selectedTrack == track.nr) {
+    if (selectedTrack == track.nr) {
         selected = 'selected';
     } else {
         selected = '';
