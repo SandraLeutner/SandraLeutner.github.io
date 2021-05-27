@@ -55,6 +55,21 @@ const drawWikipedia = (bounds) => {
     let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=SandraLeutner&lang=de&maxRows=30`;
     console.log(url);
 
+    let icons = {
+        adm1st: "wikipedia_administration.png",
+        adm2nd: "wikipedia_administration.png",
+        adm3rd: "wikipedia_administration.png",
+        airport: "wikipedia_helicopter.png",
+        city: "wikipedia_smallcity.png",
+        glacier: "wikipedia_glacier-2.png",
+        landmark: "wikipedia_landmark.png",
+        railwaystation: "wikipedia_train.png",
+        river: "wikipedia_river-2.png",
+        mountain: "wikipedia_mountains.png",
+        waterbody: "wikipedia_lake.png",
+        default: "wikipedia_information.png",
+    };
+
     // URL bei geonames.org aufrufen und JSO-Daten abholen
     fetch(url).then(
         response => response.json()
@@ -63,7 +78,19 @@ const drawWikipedia = (bounds) => {
 
         //Artikel Marker
         for (let article of jsonData.geonames){
-            let mrk = L.marker([article.lat, article.lng]);
+            //welches Icon soll verwendet werden? 
+            if (icons[article.feature]){
+                //ein Bekanntes
+            } else {
+                //unser generisches
+                article.feature = "default";
+            }
+
+            let mrk = L.marker([article.lat, article.lng], {
+                icon: L.icon({
+                    iconUrl: `icons/${icons[article.feature]}`
+                })
+            });
             mrk.addTo(overlays.wikipedia);
 
             //Bild definieren
