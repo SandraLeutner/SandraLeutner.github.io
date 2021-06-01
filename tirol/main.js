@@ -54,7 +54,7 @@ let articleDrawn = {};
 const drawWikipedia = (bounds) => {
     //console.log(bounds);
     let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=SandraLeutner&lang=de&maxRows=30`;
-    //console.log(url);
+    console.log(url);
 
     let icons = {
         adm1st: "wikipedia_administration.png",
@@ -77,29 +77,29 @@ const drawWikipedia = (bounds) => {
     ).then(jsonData => {
         //console.log(jsonData);
 
-        //Artikel Marker
-        for (let article of jsonData.geonames){
-            //habe ich den Artikel schon gezeichnet? 
-            if(articleDrawn[article.wikipediaUrl]) {
-                //ja, nicht noch einmal zeichnen
-               //console.log("schon gesehen", article.wikipediaUrl);
+        // Artikel Marker erzeugen
+        for (let article of jsonData.geonames) {
+            // habe ich den Artikel schon gezeichnet?
+            if (articleDrawn[article.wikipediaUrl]) {
+                // Ja, nicht noch einal zeichnen
+                //console.log("schon gesehen", article.wikipediaUrl);
                 continue;
             } else {
                 articleDrawn[article.wikipediaUrl] = true;
             }
 
-            //welches Icon soll verwendet werden? 
-            if (icons[article.feature]){
-                //ein Bekanntes
+            // welches Icon soll verwendet werden?
+            if (icons[article.feature]) {
+                // ein Bekanntes
             } else {
-                //unser generisches
+                // unser generisches Info-Icon
                 article.feature = "default";
             }
 
             let mrk = L.marker([article.lat, article.lng], {
                 icon: L.icon({
                     iconUrl: `icons/${icons[article.feature]}`,
-                    iconSize: [32, 37], 
+                    iconSize: [32, 37],
                     iconAnchor: [16, 37],
                     popupAnchor: [0, -37],
                 })
